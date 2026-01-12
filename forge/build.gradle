@@ -6,6 +6,22 @@ loom {
     forge {
         mixinConfig "ediblepotions.mixins.json"
     }
+    runs {
+        data {
+            data()
+            programArgs "--all", "--mod", "ediblepotions"
+            programArgs "--output", project(":common").file("src/main/generated").absolutePath
+            programArgs "--existing", project(":common").file("src/main/resources").absolutePath
+        }
+    }
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDir project(":common").file("src/main/generated")
+        }
+    }
 }
 
 architectury {

@@ -1,17 +1,20 @@
 modLoader = "javafml"
 loaderVersion = "[47,)"
-#issueTrackerURL = ""
-license = "Insert License Here"
+issueTrackerURL = "https://github.com/lingyunmo/EdiblePotionsMod/issues"
+license = "MIT"
 
 [[mods]]
 modId = "ediblepotions"
 version = "${version}"
 displayName = "Edible Potions"
-authors = "Me!"
+authors = "lingyunmo"
+# 这里的 logoFile 对应 forge/src/main/resources/ 下的路径
+logoFile = "assets/ediblepotions/icon.png"
 description = '''
-This is an example description! Tell everyone what your mod is about!
+Edible Potions adds an Infusion Table to Minecraft, allowing you to infuse food with various potion effects.
+Create powerful items like Night Vision Apples or Speed Beef!
+Supports full automation with hoppers.
 '''
-#logoFile = ""
 
 [[dependencies.ediblepotions]]
 modId = "forge"
