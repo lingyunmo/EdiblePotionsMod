@@ -1,0 +1,24 @@
+# Gradle & Build
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# Minecraft Run folders
+run/
+fabric/run
+forge/run
+run_client/
+run_server/
+logs/
+crash-reports/
+
+# OS specific
+.DS_Store
+Thumbs.db
