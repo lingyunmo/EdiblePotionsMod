@@ -3,6 +3,7 @@
   "package": "cn.bzlom.mixin",
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
+  "refmap": "ediblepotions-refmap.json",
   "client": [
     "EatingEffectMixin"
   ],

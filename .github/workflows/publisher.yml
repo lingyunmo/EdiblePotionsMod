@@ -44,7 +44,6 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Read Version
-        id: version
         run: |
           VERSION=$(grep 'mod_version' gradle.properties | awk -F'=' '{print $2}' | xargs)
           echo "VERSION=$VERSION" >> $GITHUB_ENV
@@ -54,25 +53,66 @@ jobs:
 
       - name: Generate Changelog
         run: |
+          # 找到上一个发布 tag（不是将要创建的），跨过废弃版本的间隔
           PREV_TAG=$(git tag --list 'v*' --sort=-version:refname | head -1)
-          if [ -z "$PREV_TAG" ]; then
-            cat << 'CHANGELOG_EOF' > changelog.md
-          Initial release.
 
-          **Loaders:** Fabric · Forge
+          # 按 convential commits 前缀分类所有提交
+          categorize() {
+            local prefix="$1" label="$2"
+            local commits
+            if [ -n "$PREV_TAG" ]; then
+              commits=$(git log --pretty=format:"- %s" "$PREV_TAG..HEAD" --grep="^$prefix" 2>/dev/null || true)
+            else
+              commits=$(git log --pretty=format:"- %s" --grep="^$prefix" 2>/dev/null || true)
+            fi
+            if [ -n "$commits" ]; then
+              echo "### $label"
+              echo ""
+              echo "$commits"
+              echo ""
+            fi
+          }
+
+          cat > changelog.md << 'HEADER'
+          | File | Platform |
+          |------|----------|
+          | `*-fabric-*.jar` | Fabric |
+          | `*-forge-*.jar` | Forge |
+
           **Minecraft:** ${{ env.MINECRAFT_VERSION }}
           **Java:** ${{ env.JAVA_VERSION }}
-          CHANGELOG_EOF
+          HEADER
+
+          if [ -z "$PREV_TAG" ]; then
+            echo "" >> changelog.md
+            echo "> Initial release." >> changelog.md
+            echo "" >> changelog.md
           else
-            {
-              echo "## Changes since $PREV_TAG"
-              echo ""
-              echo "**Loaders:** Fabric · Forge"
-              echo "**Minecraft:** ${{ env.MINECRAFT_VERSION }}"
-              echo ""
-              git log --pretty=format:"- %s" "$PREV_TAG..HEAD"
-              echo ""
-            } > changelog.md
+            echo "" >> changelog.md
+            echo "> All changes since \`$PREV_TAG\`" >> changelog.md
+            echo "" >> changelog.md
+          fi
+
+          # 分类提交
+          categorize "feat"     "Features"       >> changelog.md
+          categorize "fix"      "Fixes"         >> changelog.md
+          categorize "refactor" "Refactoring"   >> changelog.md
+          categorize "docs"     "Documentation" >> changelog.md
+          categorize "ci"       "CI / CD"       >> changelog.md
+
+          # 其他未分类的提交
+          if [ -n "$PREV_TAG" ]; then
+            remaining=$(git log --pretty=format:"- %s" "$PREV_TAG..HEAD" \
+              --grep="^(feat|fix|refactor|docs|ci)" --invert-grep 2>/dev/null || true)
+          else
+            remaining=$(git log --pretty=format:"- %s" \
+              --grep="^(feat|fix|refactor|docs|ci)" --invert-grep 2>/dev/null || true)
+          fi
+          if [ -n "$remaining" ]; then
+            echo "### Other Changes" >> changelog.md
+            echo "" >> changelog.md
+            echo "$remaining" >> changelog.md
+            echo "" >> changelog.md
           fi
 
       - name: Create Git Tag
@@ -85,10 +125,8 @@ jobs:
         with:
           curseforge-id: 1427235
           curseforge-token: "${{ env.CURSEFORGE_TOKEN }}"
-
           modrinth-id: kprWzdPB
           modrinth-token: "${{ env.MODRINTH_TOKEN }}"
-
           github-token: "${{ env.GITHUB_TOKEN }}"
 
           name: "v${{ env.VERSION }} for Minecraft ${{ env.MINECRAFT_VERSION }}"
