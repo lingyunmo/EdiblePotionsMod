@@ -87,6 +87,9 @@ public class InfusionTableBlockEntity extends BlockEntity implements ExtendedMen
     public static void tick(Level level, BlockPos pos, BlockState state, InfusionTableBlockEntity entity) {
         if (level.isClientSide) return;
 
+        // 红石信号暂停注能（拉杆/按钮控制启停）
+        if (level.hasNeighborSignal(pos)) return;
+
         boolean hadRecipe = hasRecipe(entity);
 
         if (hadRecipe) {
@@ -96,11 +99,9 @@ public class InfusionTableBlockEntity extends BlockEntity implements ExtendedMen
                 craftItem(entity, level, pos);
             }
         } else if (entity.progress > 0) {
-            // 只在 progress 确实发生了变化时才调用 setChanged
             entity.resetProgress();
             setChanged(level, pos, state);
         }
-        // 如果 progress 已经是 0 且没有配方，不做任何事（避免每 tick setChanged）
     }
 
     private static boolean hasRecipe(InfusionTableBlockEntity entity) {
@@ -125,18 +126,21 @@ public class InfusionTableBlockEntity extends BlockEntity implements ExtendedMen
         Item resultItem = findResultItem(foodStack, potionStack);
         if (resultItem != null) {
             foodStack.shrink(1);
+
+            // 返还对应的空瓶（原版所有药水类型都用玻璃瓶）
             entity.items.set(1, new ItemStack(Items.GLASS_BOTTLE));
+
+            // 注能食物自身已编码递送方式（构造函数传入 Delivery），无需额外 NBT
+            ItemStack result = new ItemStack(resultItem, 1);
+
             if (outputStack.isEmpty()) {
-                entity.items.set(2, new ItemStack(resultItem, 1));
+                entity.items.set(2, result);
             } else {
                 outputStack.grow(1);
             }
             entity.resetProgress();
 
-            // 立即标记脏块，确保物品栏变更被保存，比较器输出立即更新
             entity.setChanged();
-
-            // 播放注能完成音效
             level.playSound(null, pos, SoundEvents.BREWING_STAND_BREW, SoundSource.BLOCKS, 1.0F, 1.0F);
         }
     }
@@ -151,9 +155,14 @@ public class InfusionTableBlockEntity extends BlockEntity implements ExtendedMen
         if (potionType == Potions.EMPTY) return null;
         String potionId = BuiltInRegistries.POTION.getKey(potionType).getPath();
 
-        String cacheKey = foodId + "_" + potionId;
+        // 根据药水物品类型确定变体后缀（匹配 ModItems 中的三种注册 ID）
+        Item potionItem = potion.getItem();
+        String variant = potionItem == Items.SPLASH_POTION ? "_splash"
+                : potionItem == Items.LINGERING_POTION ? "_lingering"
+                : "";
 
-        // 用缓存避免每次 tick 构造 ResourceLocation 并查询注册表
+        String cacheKey = foodId + "_" + potionId + variant;
+
         if (RECIPE_CACHE.containsKey(cacheKey)) {
             return RECIPE_CACHE.get(cacheKey);
         }
