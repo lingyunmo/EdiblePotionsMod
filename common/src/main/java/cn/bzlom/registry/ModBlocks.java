@@ -18,7 +18,10 @@ public class ModBlocks {
     // 注册方块：注能台
     // copy(Blocks.STONE) 表示继承石头的硬度、抗爆属性
     public static final RegistrySupplier<Block> INFUSION_TABLE = BLOCKS.register("infusion_table",
-            () -> new InfusionTableBlock(BlockBehaviour.Properties.copy(Blocks.STONE).noOcclusion()));
+            () -> new InfusionTableBlock(BlockBehaviour.Properties.copy(Blocks.STONE)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.5F, 6.0F)));
 
     // 注册方块对应的物品 (BlockItem)，否则你拿不在手里
     public static final RegistrySupplier<Item> INFUSION_TABLE_ITEM = ITEMS.register("infusion_table",

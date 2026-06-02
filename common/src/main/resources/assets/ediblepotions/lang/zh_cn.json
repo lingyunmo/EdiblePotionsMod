@@ -1,4 +1,5 @@
 {
   "itemGroup.ediblepotions.main": "食用药剂",
-  "block.ediblepotions.infusion_table": "注能台"
+  "block.ediblepotions.infusion_table": "注能台",
+  "item.ediblepotions.infused_food.name": "%s %s"
 }
