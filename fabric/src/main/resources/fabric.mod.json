@@ -16,10 +16,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "cn.bzlom.fabric.EdiblePotionsFabric"
+      "cn.bzlom.ediblepotions.fabric.EdiblePotionsFabric"
     ],
     "client": [
-      "cn.bzlom.fabric.client.EdiblePotionsFabricClient"
+      "cn.bzlom.ediblepotions.fabric.client.EdiblePotionsFabricClient"
     ]
   },
   "mixins": [

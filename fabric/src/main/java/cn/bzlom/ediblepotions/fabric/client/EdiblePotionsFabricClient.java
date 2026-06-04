@@ -1,7 +1,7 @@
-package cn.bzlom.fabric.client;
+package cn.bzlom.ediblepotions.fabric.client;
 
-import cn.bzlom.client.screen.InfusionTableScreen; // 导入 Screen
-import cn.bzlom.registry.ModMenuTypes; // 导入 MenuType
+import cn.bzlom.ediblepotions.client.screen.InfusionTableScreen; // 导入 Screen
+import cn.bzlom.ediblepotions.registry.ModMenuTypes; // 导入 MenuType
 import dev.architectury.registry.menu.MenuRegistry; // Architectury 神器
 import net.fabricmc.api.ClientModInitializer;
 

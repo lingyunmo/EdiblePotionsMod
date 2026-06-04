@@ -1,7 +1,7 @@
-package cn.bzlom.forge.datagen;
+package cn.bzlom.ediblepotions.forge.datagen;
 
-import cn.bzlom.EdiblePotionsMod;
-import cn.bzlom.registry.ModBlocks;
+import cn.bzlom.ediblepotions.EdiblePotionsMod;
+import cn.bzlom.ediblepotions.registry.ModBlocks;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;

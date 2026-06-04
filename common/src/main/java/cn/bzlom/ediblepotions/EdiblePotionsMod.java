@@ -1,6 +1,6 @@
-package cn.bzlom;
+package cn.bzlom.ediblepotions;
 
-import cn.bzlom.registry.*;
+import cn.bzlom.ediblepotions.registry.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

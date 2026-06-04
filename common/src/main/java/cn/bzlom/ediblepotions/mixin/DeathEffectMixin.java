@@ -1,4 +1,4 @@
-package cn.bzlom.mixin;
+package cn.bzlom.ediblepotions.mixin;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;

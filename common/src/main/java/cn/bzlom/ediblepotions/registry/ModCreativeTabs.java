@@ -1,6 +1,6 @@
-package cn.bzlom.registry;
+package cn.bzlom.ediblepotions.registry;
 
-import cn.bzlom.EdiblePotionsMod;
+import cn.bzlom.ediblepotions.EdiblePotionsMod;
 import dev.architectury.registry.CreativeTabRegistry;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;

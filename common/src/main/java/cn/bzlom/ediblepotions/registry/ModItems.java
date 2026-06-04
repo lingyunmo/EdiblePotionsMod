@@ -1,8 +1,8 @@
-package cn.bzlom.registry;
+package cn.bzlom.ediblepotions.registry;
 
-import cn.bzlom.EdiblePotionsMod;
-import cn.bzlom.item.InfusedFoodItem;
-import cn.bzlom.item.InfusedFoodItem.Delivery;
+import cn.bzlom.ediblepotions.EdiblePotionsMod;
+import cn.bzlom.ediblepotions.item.InfusedFoodItem;
+import cn.bzlom.ediblepotions.item.InfusedFoodItem.Delivery;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.registries.BuiltInRegistries;

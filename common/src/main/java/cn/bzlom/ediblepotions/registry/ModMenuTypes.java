@@ -1,7 +1,7 @@
-package cn.bzlom.registry;
+package cn.bzlom.ediblepotions.registry;
 
-import cn.bzlom.EdiblePotionsMod;
-import cn.bzlom.menu.InfusionTableMenu;
+import cn.bzlom.ediblepotions.EdiblePotionsMod;
+import cn.bzlom.ediblepotions.menu.InfusionTableMenu;
 import dev.architectury.registry.menu.MenuRegistry; // 关键导入！
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;

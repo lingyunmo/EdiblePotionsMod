@@ -1,8 +1,8 @@
-package cn.bzlom.registry;
+package cn.bzlom.ediblepotions.registry;
 
-import cn.bzlom.EdiblePotionsMod;
-import cn.bzlom.block.InfusionTableBlock;
-import cn.bzlom.block.entity.InfusionTableBlockEntity;
+import cn.bzlom.ediblepotions.EdiblePotionsMod;
+import cn.bzlom.ediblepotions.block.InfusionTableBlock;
+import cn.bzlom.ediblepotions.block.entity.InfusionTableBlockEntity;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.registries.Registries;

@@ -1,10 +1,10 @@
-package cn.bzlom.forge;
+package cn.bzlom.ediblepotions.forge;
 
-import cn.bzlom.EdiblePotionsMod;
-import cn.bzlom.client.screen.InfusionTableScreen; // 导入 Screen
-import cn.bzlom.registry.ModMenuTypes; // 导入 MenuType
-import cn.bzlom.forge.datagen.ModBlockStateProvider;
-import cn.bzlom.forge.datagen.ModItemModelProvider;
+import cn.bzlom.ediblepotions.EdiblePotionsMod;
+import cn.bzlom.ediblepotions.client.screen.InfusionTableScreen; // 导入 Screen
+import cn.bzlom.ediblepotions.registry.ModMenuTypes; // 导入 MenuType
+import cn.bzlom.ediblepotions.forge.datagen.ModBlockStateProvider;
+import cn.bzlom.ediblepotions.forge.datagen.ModItemModelProvider;
 import dev.architectury.platform.forge.EventBuses;
 import dev.architectury.registry.menu.MenuRegistry; // 关键导入：Architectury 的菜单注册器
 import net.minecraftforge.data.event.GatherDataEvent;

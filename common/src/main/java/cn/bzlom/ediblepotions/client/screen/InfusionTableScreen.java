@@ -1,7 +1,7 @@
-package cn.bzlom.client.screen;
+package cn.bzlom.ediblepotions.client.screen;
 
-import cn.bzlom.EdiblePotionsMod;
-import cn.bzlom.menu.InfusionTableMenu;
+import cn.bzlom.ediblepotions.EdiblePotionsMod;
+import cn.bzlom.ediblepotions.menu.InfusionTableMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;

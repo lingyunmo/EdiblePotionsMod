@@ -1,6 +1,6 @@
-package cn.bzlom.mixin;
+package cn.bzlom.ediblepotions.mixin;
 
-import cn.bzlom.item.InfusedFoodItem;
+import cn.bzlom.ediblepotions.item.InfusedFoodItem;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;

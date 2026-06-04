@@ -1,7 +1,7 @@
-package cn.bzlom.menu;
+package cn.bzlom.ediblepotions.menu;
 
-import cn.bzlom.registry.ModBlocks;
-import cn.bzlom.registry.ModMenuTypes;
+import cn.bzlom.ediblepotions.registry.ModBlocks;
+import cn.bzlom.ediblepotions.registry.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;

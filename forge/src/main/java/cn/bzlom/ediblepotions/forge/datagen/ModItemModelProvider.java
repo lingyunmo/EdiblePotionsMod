@@ -1,8 +1,8 @@
-package cn.bzlom.forge.datagen;
+package cn.bzlom.ediblepotions.forge.datagen;
 
-import cn.bzlom.EdiblePotionsMod;
-import cn.bzlom.item.InfusedFoodItem;
-import cn.bzlom.registry.ModItems;
+import cn.bzlom.ediblepotions.EdiblePotionsMod;
+import cn.bzlom.ediblepotions.item.InfusedFoodItem;
+import cn.bzlom.ediblepotions.registry.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;

@@ -1,7 +1,7 @@
-package cn.bzlom.block.entity;
+package cn.bzlom.ediblepotions.block.entity;
 
-import cn.bzlom.menu.InfusionTableMenu;
-import cn.bzlom.registry.ModBlockEntities;
+import cn.bzlom.ediblepotions.menu.InfusionTableMenu;
+import cn.bzlom.ediblepotions.registry.ModBlockEntities;
 import dev.architectury.registry.menu.ExtendedMenuProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

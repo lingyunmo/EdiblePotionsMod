@@ -1,8 +1,8 @@
-package cn.bzlom.fabric;
+package cn.bzlom.ediblepotions.fabric;
 
 import net.fabricmc.api.ModInitializer;
 
-import cn.bzlom.EdiblePotionsMod;
+import cn.bzlom.ediblepotions.EdiblePotionsMod;
 
 public final class EdiblePotionsFabric implements ModInitializer {
     @Override
