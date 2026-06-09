@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -38,7 +38,12 @@ import java.util.UUID;
 public abstract class DeathEffectMixin {
 
     @Unique
-    private static final Map<UUID, ListTag> PENDING_EFFECTS = new HashMap<>();
+    private static final Map<UUID, ListTag> PENDING_EFFECTS = new LinkedHashMap<>() {
+        @Override
+        protected boolean removeEldestEntry(Map.Entry<UUID, ListTag> eldest) {
+            return size() > 64; // 防止玩家断线未重生导致的内存泄漏
+        }
+    };
 
     /**
      * 死亡前：快照所有活跃效果存入静态 Map。

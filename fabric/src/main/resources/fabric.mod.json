@@ -8,8 +8,9 @@
     "lingyunmo"
   ],
   "contact": {
-    "homepage": "",
-    "sources": ""
+    "homepage": "https://github.com/lingyunmo/EdiblePotionsMod",
+    "sources": "https://github.com/lingyunmo/EdiblePotionsMod",
+    "issues": "https://github.com/lingyunmo/EdiblePotionsMod/issues"
   },
   "license": "GPL-3.0",
   "icon": "assets/ediblepotions/icon.png",

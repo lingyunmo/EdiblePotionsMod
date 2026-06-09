@@ -127,8 +127,11 @@ public class InfusionTableBlockEntity extends BlockEntity implements ExtendedMen
         if (resultItem != null) {
             foodStack.shrink(1);
 
-            // 返还对应的空瓶（原版所有药水类型都用玻璃瓶）
-            entity.items.set(1, new ItemStack(Items.GLASS_BOTTLE));
+            // 消耗 1 瓶药水，仅当药水耗尽时才返还空瓶
+            potionStack.shrink(1);
+            if (potionStack.isEmpty()) {
+                entity.items.set(1, new ItemStack(Items.GLASS_BOTTLE));
+            }
 
             // 注能食物自身已编码递送方式（构造函数传入 Delivery），无需额外 NBT
             ItemStack result = new ItemStack(resultItem, 1);

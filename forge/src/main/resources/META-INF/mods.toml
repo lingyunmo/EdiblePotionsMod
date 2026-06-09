@@ -1,6 +1,7 @@
 modLoader = "javafml"
 loaderVersion = "[47,)"
 issueTrackerURL = "https://github.com/lingyunmo/EdiblePotionsMod/issues"
+displayURL = "https://github.com/lingyunmo/EdiblePotionsMod"
 license = "GPL-3.0"
 
 [[mods]]

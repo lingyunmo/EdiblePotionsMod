@@ -29,7 +29,7 @@ public abstract class EatingEffectMixin {
 
     @Inject(method = "addEatEffect", at = @At("TAIL"))
     private void onAddEatEffect(ItemStack stack, Level level, LivingEntity entity, CallbackInfo ci) {
-        if (level.isClientSide) return;
+        if (!level.isClientSide) return;
         if (!(stack.getItem() instanceof InfusedFoodItem food)) return;
 
         // 获取药水颜色，粒子数量与效果数量成正比
