@@ -1,0 +1,8 @@
+{
+  "itemGroup.ediblepotions.main": "食用藥水",
+  "block.ediblepotions.infusion_table": "灌注台",
+  "item.ediblepotions.infused_food.name": "%s%s",
+  "item.ediblepotions.infused_food.name.prefixed": "%s%s%s",
+  "item.ediblepotions.splash_prefix": "飛濺",
+  "item.ediblepotions.lingering_prefix": "滯留"
+}

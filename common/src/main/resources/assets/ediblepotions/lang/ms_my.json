@@ -1,0 +1,8 @@
+{
+  "itemGroup.ediblepotions.main": "Ramuan boleh dimakan",
+  "block.ediblepotions.infusion_table": "Meja infusi",
+  "item.ediblepotions.infused_food.name": "%s %s",
+  "item.ediblepotions.infused_food.name.prefixed": "%s %s %s",
+  "item.ediblepotions.splash_prefix": "Percikan",
+  "item.ediblepotions.lingering_prefix": "Berlarutan"
+}

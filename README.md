@@ -9,7 +9,7 @@
 [![CurseForge](https://img.shields.io/badge/CurseForge-Available-orange?style=flat-square&logo=curseforge)](https://www.curseforge.com/minecraft/mc-mods/ediblepotions)
 [![Modrinth](https://img.shields.io/badge/Modrinth-Available-green?style=flat-square&logo=modrinth)](https://modrinth.com/mod/ediblepotions)
 
-[简体中文](README_zh.md)
+**Languages:** 🇺🇸 **English** · 🇨🇳 [简体中文](README_zh.md) · 🇹🇼 [繁體中文](README_zh_tw.md) · 🇯🇵 [日本語](README_ja.md) · 🇰🇷 [한국어](README_ko.md) · 🇪🇸 [Español](README_es.md) · 🇫🇷 [Français](README_fr.md) · 🇲🇾 [Bahasa Melayu](README_ms.md)
 
 ![Icon](common/src/main/resources/assets/ediblepotions/icon.png)
 
@@ -74,7 +74,7 @@ Architectury bytecode transformers handle the rest at build time.
 
 ## Supported Foods
 
-All **47 vanilla foods** are supported (Cake, Milk Bucket, and Ominous Bottle excluded):
+All **40 vanilla foods** are supported (Cake and Milk Bucket excluded):
 
 `Apple` · `Golden Apple` · `Enchanted Golden Apple` · `Melon Slice` · `Sweet Berries` ·
 `Glow Berries` · `Chorus Fruit` · `Carrot` · `Golden Carrot` · `Potato` · `Baked Potato` ·

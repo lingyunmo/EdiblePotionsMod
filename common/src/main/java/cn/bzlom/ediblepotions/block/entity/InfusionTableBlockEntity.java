@@ -37,7 +37,10 @@ import java.util.Map;
 
 public class InfusionTableBlockEntity extends BlockEntity implements ExtendedMenuProvider, WorldlyContainer {
 
-    // 缓存 foodId_potionId → Item 的映射，避免每次 tick 都查询注册表
+    /** 注能台注能所需总进度（ticks，100 ticks = 5 秒） */
+    private static final int MAX_PROGRESS = 100;
+
+    /** 缓存 foodId_potionId_variant → Item 的映射，避免每次 tick 都查询注册表 */
     private static final Map<String, Item> RECIPE_CACHE = new HashMap<>();
 
     private static final int[] SLOTS_FOR_UP = new int[]{0};
@@ -48,14 +51,13 @@ public class InfusionTableBlockEntity extends BlockEntity implements ExtendedMen
 
     protected final ContainerData data;
     private int progress = 0;
-    private int maxProgress = 100;
 
     public int getProgress() {
         return progress;
     }
 
     public int getMaxProgress() {
-        return maxProgress;
+        return MAX_PROGRESS;
     }
 
     public InfusionTableBlockEntity(BlockPos pos, BlockState state) {
@@ -65,16 +67,16 @@ public class InfusionTableBlockEntity extends BlockEntity implements ExtendedMen
             public int get(int index) {
                 return switch (index) {
                     case 0 -> InfusionTableBlockEntity.this.progress;
-                    case 1 -> InfusionTableBlockEntity.this.maxProgress;
+                    case 1 -> MAX_PROGRESS;
                     default -> 0;
                 };
             }
             @Override
             public void set(int index, int value) {
-                switch (index) {
-                    case 0 -> InfusionTableBlockEntity.this.progress = value;
-                    case 1 -> InfusionTableBlockEntity.this.maxProgress = value;
+                if (index == 0) {
+                    InfusionTableBlockEntity.this.progress = value;
                 }
+                // index 1 (maxProgress) 是常量，不允许修改
             }
             @Override
             public int getCount() {
@@ -84,6 +86,7 @@ public class InfusionTableBlockEntity extends BlockEntity implements ExtendedMen
     }
 
     // --- 核心逻辑 Tick ---
+
     public static void tick(Level level, BlockPos pos, BlockState state, InfusionTableBlockEntity entity) {
         if (level.isClientSide) return;
 
@@ -95,7 +98,7 @@ public class InfusionTableBlockEntity extends BlockEntity implements ExtendedMen
         if (hadRecipe) {
             entity.progress++;
             setChanged(level, pos, state);
-            if (entity.progress >= entity.maxProgress) {
+            if (entity.progress >= MAX_PROGRESS) {
                 craftItem(entity, level, pos);
             }
         } else if (entity.progress > 0) {
@@ -152,6 +155,11 @@ public class InfusionTableBlockEntity extends BlockEntity implements ExtendedMen
         this.progress = 0;
     }
 
+    /**
+     * 查找配方结果物品。使用缓存的 foodId_potionId_variant 键，
+     * 首次查询时查注册表并缓存（包含 null，避免重复查询不存在的配方）。
+     */
+    @Nullable
     private static Item findResultItem(ItemStack food, ItemStack potion) {
         String foodId = BuiltInRegistries.ITEM.getKey(food.getItem()).getPath();
         var potionType = PotionUtils.getPotion(potion);
@@ -193,6 +201,8 @@ public class InfusionTableBlockEntity extends BlockEntity implements ExtendedMen
     public boolean canPlaceItemThroughFace(int index, ItemStack itemStack, @Nullable Direction direction) {
         if (index == 2) return false;
         if (index == 1) return isPotion(itemStack);
+        // 食物槽：仅接受可食用物品（有 FoodProperties 的物品）
+        if (index == 0) return itemStack.isEdible();
         return true;
     }
 
@@ -202,7 +212,7 @@ public class InfusionTableBlockEntity extends BlockEntity implements ExtendedMen
         return index == 1 && stack.getItem() == Items.GLASS_BOTTLE;
     }
 
-    private boolean isPotion(ItemStack stack) {
+    private static boolean isPotion(ItemStack stack) {
         return stack.getItem() == Items.POTION ||
                 stack.getItem() == Items.SPLASH_POTION ||
                 stack.getItem() == Items.LINGERING_POTION;

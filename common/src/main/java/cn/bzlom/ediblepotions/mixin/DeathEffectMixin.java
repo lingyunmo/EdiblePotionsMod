@@ -3,7 +3,6 @@ package cn.bzlom.ediblepotions.mixin;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -11,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -25,11 +24,20 @@ import java.util.UUID;
  * 无需依赖 Fabric 的 getPersistentData() 或 Forge 的 Capability，
  * 同一份代码在双平台行为一致。
  *
+ * 生命周期：
+ *   die() → 快照效果存入 Map
+ *   ├── 复活: restoreFrom() → 取出恢复，移除条目
+ *   └── 断线: disconnect() → 移除残留条目，防止泄漏
+ *   （单人游戏退出世界时 disconnect() 正常触发，无需额外服务端停止清理）
+ *
  * 切入目标 #1：ServerPlayer.die(DamageSource)
  *   时机 @HEAD：原版清除效果之前序列化所有活跃效果
  *
  * 切入目标 #2：ServerPlayer.restoreFrom(ServerPlayer, boolean)
  *   时机 @TAIL：原版恢复数据后重新施加效果
+ *
+ * 切入目标 #3：ServerPlayer.disconnect()
+ *   时机 @HEAD：玩家死亡后直接退出或退出世界时清除残留条目
  *
  * 横切关注点：死亡时效果持久化
  * 核心逻辑：原版死亡 / 重生处理 ← 不受影响
@@ -38,17 +46,10 @@ import java.util.UUID;
 public abstract class DeathEffectMixin {
 
     @Unique
-    private static final Map<UUID, ListTag> PENDING_EFFECTS = new LinkedHashMap<>() {
-        @Override
-        protected boolean removeEldestEntry(Map.Entry<UUID, ListTag> eldest) {
-            return size() > 64; // 防止玩家断线未重生导致的内存泄漏
-        }
-    };
+    private static final Map<UUID, ListTag> PENDING_EFFECTS = new HashMap<>();
 
     /**
      * 死亡前：快照所有活跃效果存入静态 Map。
-     * 必须使用 @Inject(method="die") 而不是 capture DamageSource，
-     * 避免引入不必要的导入依赖。
      */
     @Inject(method = "die", at = @At("HEAD"))
     private void onDie(CallbackInfo ci) {
@@ -98,5 +99,15 @@ public abstract class DeathEffectMixin {
                 }
             }
         }
+    }
+
+    /**
+     * 玩家断线清理：死亡后不复活直接退出，移除残留条目防止泄漏。
+     */
+    @Inject(method = "disconnect", at = @At("HEAD"))
+    private void onDisconnect(CallbackInfo ci) {
+        ServerPlayer self = (ServerPlayer) (Object) this;
+        if (self.level().isClientSide) return;
+        PENDING_EFFECTS.remove(self.getUUID());
     }
 }

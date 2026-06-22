@@ -33,9 +33,6 @@ subprojects {
 
     loom {
         silentMojangMappingsLicense()
-        mixin {
-            defaultRefmapName = "ediblepotions-refmap.json"
-        }
     }
 
     dependencies {

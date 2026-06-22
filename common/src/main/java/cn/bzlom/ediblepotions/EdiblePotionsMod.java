@@ -9,7 +9,6 @@ public final class EdiblePotionsMod {
     private static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     public static void init() {
-        // 初始化
         ModItems.register();
         ModCreativeTabs.register();
         ModBlocks.register();

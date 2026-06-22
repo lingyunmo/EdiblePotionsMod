@@ -1,0 +1,8 @@
+{
+  "itemGroup.ediblepotions.main": "식용 포션",
+  "block.ediblepotions.infusion_table": "주입대",
+  "item.ediblepotions.infused_food.name": "%s%s",
+  "item.ediblepotions.infused_food.name.prefixed": "%s%s%s",
+  "item.ediblepotions.splash_prefix": "투척",
+  "item.ediblepotions.lingering_prefix": "잔류"
+}

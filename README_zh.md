@@ -9,7 +9,7 @@
 [![CurseForge](https://img.shields.io/badge/CurseForge-Available-orange?style=flat-square&logo=curseforge)](https://www.curseforge.com/minecraft/mc-mods/ediblepotions)
 [![Modrinth](https://img.shields.io/badge/Modrinth-Available-green?style=flat-square&logo=modrinth)](https://modrinth.com/mod/ediblepotions)
 
-[English](README.md)
+**Languages:** 🇺🇸 [English](README.md) · 🇨🇳 **简体中文** · 🇹🇼 [繁體中文](README_zh_tw.md) · 🇯🇵 [日本語](README_ja.md) · 🇰🇷 [한국어](README_ko.md) · 🇪🇸 [Español](README_es.md) · 🇫🇷 [Français](README_fr.md) · 🇲🇾 [Bahasa Melayu](README_ms.md)
 
 ![Icon](common/src/main/resources/assets/ediblepotions/icon.png)
 
@@ -71,7 +71,7 @@
 
 ## 支持的食物
 
-支持全部 **47 种原版食物**（蛋糕、奶桶、不祥之瓶除外）：
+支持全部 **40 种原版食物**（蛋糕、奶桶除外）：
 
 `苹果` · `金苹果` · `附魔金苹果` · `西瓜片` · `甜浆果` · `发光浆果` ·
 `紫颂果` · `胡萝卜` · `金胡萝卜` · `马铃薯` · `烤马铃薯` · `毒马铃薯` ·
