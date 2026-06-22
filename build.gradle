@@ -10,7 +10,8 @@ architectury {
 
 allprojects {
     group = rootProject.maven_group
-    version = rootProject.mod_version
+    // Sodium 命名惯例: ediblepotions-fabric-1.0.4+mc1.20.1.jar
+    version = "${rootProject.mod_version}+mc${rootProject.minecraft_version}"
 }
 
 subprojects {
@@ -33,6 +34,9 @@ subprojects {
 
     loom {
         silentMojangMappingsLicense()
+        mixin {
+            defaultRefmapName = "ediblepotions-refmap.json"
+        }
     }
 
     dependencies {
